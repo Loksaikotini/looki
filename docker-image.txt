@@ -1,0 +1,50 @@
+install wsl by following steps:
+1. open start menu 
+search for turn windows features on and off 
+press enter
+scroll down you'll find windows subsystem for linux
+open cmd
+type wsl --help to check if it is working
+type the following command >wsl --install -d Ubuntu
+
+open chrome and download docker desktop for windows arm64
+install docker desktop
+create an account in docker hub
+
+create a directory in your system
+>mkdir my-app
+>cd mp-app
+create index.html and add following 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>Welcome to my Dockerized HTML page!</p>
+</body>
+</html>
+
+create "Dockerfile" and add following 
+
+# Use a lightweight web server image
+FROM nginx:alpine
+
+# Copy the HTML file to the default directory served by Nginx
+COPY index.html /usr/share/nginx/html/index.html
+
+# Expose port 80 to access the web server
+EXPOSE 80
+
+use the following commands to create docker image
+
+make sure docker desktop is running
+
+in your project directory run the following
+>docker build -t your-repo-name/my-app .
+>docker run -p 8080:80 your-repo-name/my-app
+open browser and search for localhost:8080 to see application
+>docker push your-repo-name/my-app
